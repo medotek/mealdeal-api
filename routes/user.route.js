@@ -5,7 +5,7 @@ const userRoute = express.Router();
 let userModel = require('../model/User');
 
 // Add user
-userRoute.route('/create-user').post((req, res, next) => {
+userRoute.route('/create').post((req, res, next) => {
     userModel.create(req.body, (error, data) => {
         if (error) {
             return next(error)
@@ -27,8 +27,8 @@ userRoute.route('/').get((req, res) => {
 })
 
 // Get single user
-userRoute.route('/get-user/:uid').get((req, res) => {
-    userModel.findOne(req.params.uid, (error, data) => {
+userRoute.route('/get/:uid').get((req, res) => {
+    userModel.findOne({uid: req.params.uid}, (error, data) => {
         if (error) {
             return next(error)
         } else {
@@ -39,8 +39,8 @@ userRoute.route('/get-user/:uid').get((req, res) => {
 
 
 // Update user
-userRoute.route('/update-user/:id').put((req, res, next) => {
-    userModel.findByIdAndUpdate(req.params.id, {
+userRoute.route('/update/:uid').put((req, res, next) => {
+    userModel.findOneAndUpdate({uid: req.params.uid}, {
         $set: req.body
     }, (error, data) => {
         if (error) {
@@ -54,8 +54,8 @@ userRoute.route('/update-user/:id').put((req, res, next) => {
 })
 
 // Delete user
-userRoute.route('/delete-deal/:id').delete((req, res, next) => {
-    userModel.findByIdAndRemove(req.params.id, (error, data) => {
+userRoute.route('/delete/:uid').delete((req, res, next) => {
+    userModel.findOneAndRemove({uid: req.params.uid}, (error, data) => {
         if (error) {
             return next(error);
         } else {

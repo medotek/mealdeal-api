@@ -21,6 +21,7 @@ mongoose.connect(dataBaseConfig.db, {
 )
 
 const dealRoute = require('./routes/deal.route')
+const userRoute = require('./routes/user.route')
 
 const app = express();
 app.use(bodyParser.urlencoded({
@@ -31,6 +32,7 @@ app.use(cors());
 
 // RESTful API root
 app.use('/api', dealRoute)
+app.use('/api/user', userRoute)
 
 // PORT
 const port = process.env.PORT || 3001;
