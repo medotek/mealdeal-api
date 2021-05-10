@@ -27,8 +27,8 @@ userRoute.route('/').get((req, res) => {
 })
 
 // Get single user
-userRoute.route('/get-user/:id').get((req, res) => {
-    userModel.findById(req.params.id, (error, data) => {
+userRoute.route('/get-user/:uid').get((req, res) => {
+    userModel.findOne(req.params.uid, (error, data) => {
         if (error) {
             return next(error)
         } else {
