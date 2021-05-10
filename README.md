@@ -10,5 +10,8 @@ Installer les dépendences du projet
 Allumer le serveur
 > npm start
 
+ou
+> node app.js
+
 Se référer au lien suivant pour gérer les models :  
 https://www.positronx.io/build-ionic-cordova-angular-crud-mobile-app/
