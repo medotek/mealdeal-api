@@ -18,12 +18,14 @@ dealRoute.route('/create-deal').post((req, res, next) => {
 // Get all deals
 dealRoute.route('/').get((req, res) => {
     dealModel.find((error, data) => {
+
+    }).sort({dateCreation: 'desc'}).exec(function(error, data) {
         if (error) {
             return next(error)
         } else {
             res.json(data)
         }
-    })
+    });
 })
 
 dealRoute.route('/search-deal/:search').get((req, res, next) => {
@@ -66,8 +68,8 @@ dealRoute.route('/update-deal/:id').put((req, res, next) => {
 })
 
 // Delete deal
-dealRoute.route('/delete-deal/:id').delete((req, res, next) => {
-    dealModel.findByIdAndRemove(req.params.id, (error, data) => {
+dealRoute.route('/delete-deal/:uid/:id').delete((req, res, next) => {
+    dealModel.findByIdAndRemove({_id: req.params.id, uid: req.params.uid}, (error, data) => {
         if (error) {
             return next(error);
         } else {
@@ -81,12 +83,13 @@ dealRoute.route('/delete-deal/:id').delete((req, res, next) => {
 // Delete deal
 dealRoute.route('/get-user-deals/:uid').get((req, res) => {
     dealModel.find({author: req.params.uid}, (error, data) => {
+    }).sort({dateCreation: 'desc'}).exec(function(error, data) {
         if (error) {
             return next(error)
         } else {
             res.json(data)
         }
-    })
+    });
 })
 
 module.exports = dealRoute;
