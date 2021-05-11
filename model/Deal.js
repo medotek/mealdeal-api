@@ -41,5 +41,6 @@ let Deal = new Schema({
 }, {
     collection: 'deals'
 })
+Deal.index({title: 'text',  description: 'text'});
 
 module.exports = mongoose.model('Deal', Deal)

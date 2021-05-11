@@ -26,6 +26,18 @@ dealRoute.route('/').get((req, res) => {
     })
 })
 
+dealRoute.route('/search-deal/:search').get((req, res, next) => {
+
+    dealModel.find({title: { $regex:  req.params.search, $options: "i" }}, (error, data) => {
+        if (error) {
+            console.log(req.params.id)
+            return next(error)
+        } else {
+            res.json(data)
+        }
+    });
+});
+
 // Get single song
 dealRoute.route('/get-deal/:id').get((req, res) => {
     dealModel.findById(req.params.id, (error, data) => {

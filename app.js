@@ -7,10 +7,12 @@ let express = require('express'),
 
 // Connecting mongoDB
 mongoose.Promise = global.Promise;
+
 mongoose.connect(dataBaseConfig.db, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useCreateIndex: true
 }).then(() => {
         console.log('Database connected successfully ')
         console.log(mongoose.connections.othersDb)
@@ -19,6 +21,7 @@ mongoose.connect(dataBaseConfig.db, {
         console.log('Could not connected to database : ' + error)
     }
 )
+
 
 const dealRoute = require('./routes/deal.route')
 const userRoute = require('./routes/user.route')

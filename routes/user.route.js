@@ -15,6 +15,7 @@ userRoute.route('/create').post((req, res, next) => {
     })
 });
 
+
 // Get all users
 userRoute.route('/').get((req, res) => {
     userModel.find((error, data) => {
