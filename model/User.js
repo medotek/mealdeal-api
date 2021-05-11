@@ -7,6 +7,9 @@ let User = new Schema({
     },
     uid: {
         type: String
+    },
+    creationDate: {
+        type: Date
     }
 }, {
     collection: 'users'
